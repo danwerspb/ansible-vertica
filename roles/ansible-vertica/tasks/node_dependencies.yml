@@ -2,12 +2,12 @@
 # ©Copyright 2015 Hewlett-Packard Development Company, L.P.
 
 - name: Install Vertica dependencies (apt)
-  apt: name="{{item}}" state=present
-  with_items: vertica_dependencies
+  apt: pkg="{{ item }}" state=present
+  with_items: "{{vertica_dependencies}}"
   when: not skip_install and ansible_os_family == 'Debian'
 
 - name: Install Vertica dependencies (yum)
-  yum: name="{{item}}" state=present
+  yum: pkg="{{item}}" state=present
   with_items: vertica_dependencies
   when: not skip_install and ansible_os_family == 'RedHat'
 

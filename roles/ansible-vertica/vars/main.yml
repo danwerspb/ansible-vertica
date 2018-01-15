@@ -12,6 +12,7 @@ vertica_dependencies:
   - "{{ 'openssh' if ansible_os_family == 'RedHat' else 'ssh' }}"
   - sysstat
   - mcelog
+  - locales
 # daily|weekly|monthly
 vertica_logrotate_period: weekly
 vertica_logrotate_retention: 4

@@ -3,7 +3,8 @@
 
 - name: Get Vertica node name
   command: /opt/vertica/bin/vsql -U dbadmin -w '{{ vertica_dbadmin_password }}' -t -A -c "select NODE_NAME from CURRENT_SESSION;"
-  sudo_user: dbadmin
+  # sudo_user: dbadmin
+  become: dbadmin
   environment: "{{vertica_env}}"
   register: vertica_node
 

@@ -1,0 +1,23 @@
+---
+# ©Copyright 2015 Hewlett-Packard Development Company, L.P.
+
+- include: node_dependencies.yml
+
+- name: Install Vertica from apt repo
+  apt: pkg="vertica{% if vertica_version is defined %}={{ vertica_version }}{% endif %}"
+  become: true
+  when: vertica_use_apt and vertica_version is defined
+
+- name: Copy Vertica package to servers
+  copy: src="{{vertica_package}}" dest=/tmp/
+  when: not vertica_use_apt
+
+- name: Install Vertica from local (deb)
+  apt:  deb="/tmp/{{vertica_package}}" state=installed
+  become: true
+  when: not vertica_use_apt and ansible_os_family == 'Debian'
+
+- name: Install Vertica from local (yum)
+  yum:  rpm="/tmp/{{vertica_package}}" state=present
+  become: true
+  when: not vertica_use_apt and ansible_os_family == 'RedHat'
