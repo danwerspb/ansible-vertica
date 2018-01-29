@@ -1,4 +1,5 @@
 [web]
-host1.example.org
-host2.example.org
-	
+host0.example.org ansible_host=172.18.0.2 ansible_user=root
+host1.example.org ansible_host=172.18.0.3 ansible_user=root
+host2.example.org ansible_host=172.18.0.4 ansible_user=root
+host3.example.org ansible_host=172.18.0.5 ansible_user=root
